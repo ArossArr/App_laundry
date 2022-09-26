@@ -6,6 +6,7 @@ use App\Models\TransaksiModel;
 use App\Models\PaketModel;
 use App\Models\PelangganModel;
 use App\Models\DetailModel;
+use CodeIgniter\Database\SQLSRV\Result;
 class Transaksi extends Controller{
   protected $pelanggans, $pakets, $transaksi, $detail, $session, $db;
 
@@ -143,5 +144,16 @@ class Transaksi extends Controller{
     $this->transaksi->update($id,$data);
     session()->setFlashdata('sukses','laundry dihapus');
     return redirect('laporan');
+  }
+  public function filter(){
+    $status = $this->request->getPost('status');
+    if($status == "" || $status == null){
+      $query = $this->db->query('select a.*,b.* from tbtransaksi a,tbpelanggan b where a.id_pelanggan = b.id_pelanggan');
+    } else {
+      $query =$this->db->query("select a.*,b.* from tbtransaksi a,tbpelanggan b where a.id_pelanggan = b.id_pelanggan and a.status='$status'");
+    }
+    $result = $query->getResultArray();
+    $data['trans'] = $result;
+    return view('tampil_laporan',$data);
   }
 }

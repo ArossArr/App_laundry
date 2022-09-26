@@ -9,7 +9,19 @@ Laporan transaksi
     <a href="/transaksi" class="btn btn-primary">Paket Baru</a>
   </div>
   <div class="card-body">
-    <table class="table table-bordered">
+    <form action="/laporan/filter" method="post" class="row">
+        <div class="col">
+          <select name="status" id="status" class="form-control">
+            <option value="">Semua</option>
+            <option value="0">Belum Diambil</option>
+            <option value="1">Sudah Diambil</option>
+          </select>
+        </div>
+        <div class="col">
+          <button type="submit" class="btn btn-primary">Cari</button>
+        </div>
+    </form>
+    <table class="table table-bordered mt-4">
       <tr>
         <th>No.</th>
         <th>Nama</th>
@@ -79,6 +91,9 @@ Laporan transaksi
                 url:"/transaksi/detail/"+id,
                 success : function (res){
                     $('#data-detail').html(res);
+                },
+                error : function(request, status, error){
+                  alert(request.responseText);
                 }
             })
         });

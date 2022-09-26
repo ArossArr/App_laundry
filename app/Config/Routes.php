@@ -75,6 +75,7 @@ $routes->add('/stransaksi','Transaksi::simpan',['filter'=>'auth']);
 $routes->get('/laporan','Transaksi::laporan',['filter'=>'auth']);
 $routes->get('/laporan/ambil/(:segment)','Transaksi::ambil/$1');
 $routes->get('/laporan/delete/(:segment)','Transaksi::delete/$1');
+$routes->add('/laporan/filter','Transaksi::filter',['filter'=>'auth']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing
