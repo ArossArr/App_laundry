@@ -40,7 +40,6 @@ $routes->set404Override();
 // $routes->get('/c', 'Home::uji');
 
 // Controller login
-$routes->get('/login','login::tampil');
 $routes->get('/','Login::index');
 $routes->add('plogin','Login::login');
 $routes->get('/logout','Login::logout');
